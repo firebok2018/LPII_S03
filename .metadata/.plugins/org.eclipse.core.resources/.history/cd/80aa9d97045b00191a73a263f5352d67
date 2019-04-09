@@ -1,0 +1,25 @@
+package ConexionDatabase;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+
+import Model.Alumnos;
+import Utils.Conexion;
+
+public class CRUD_Alumno {
+	
+	public Alumnos  SearchAlumno(int id) {
+		Connection con= null;
+		CallableStatement calls=null;
+		try {
+			con=new Conexion().getConexion();
+			String sp="{ call ls_id(?); }";
+			calls=con.prepareCall(sp);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+	}
+
+}

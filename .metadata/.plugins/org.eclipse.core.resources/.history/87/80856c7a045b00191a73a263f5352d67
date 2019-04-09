@@ -1,0 +1,13 @@
+package ConexionDatabase;
+
+import java.sql.Connection;
+
+import Model.Alumnos;
+
+public class CRUD_Alumno {
+	public Alumnos  SearchAlumno(int id) {
+		String sqlquery="{ call ls_id(9); }";
+		Connection sql=sqlquery;
+	}
+
+}

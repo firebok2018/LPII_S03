@@ -1,0 +1,44 @@
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Model.Alumnos;
+import Utils.Conexion;
+
+public class prueba {
+
+	public static void main(String[] args) {
+		
+		
+			Connection con= null;
+			CallableStatement calls=null;
+			ResultSet rs=null;
+			Alumnos alu=null;
+			try {
+				con=new Conexion().getConexion();
+				String sp="{ call ls_id(?); }";
+				calls=con.prepareCall(sp);
+				calls.setInt(1, 9);
+				calls.execute();
+				while (rs.next()) {
+					alu  = new Alumnos();
+					System.out.println(rs.getInt(9)+"");
+					
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+				
+			}finally {
+				try {
+					con.close();
+					calls.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+	}
+}

@@ -1,0 +1,45 @@
+
+public class prueba {
+
+	public static void main(String[] args) {
+		
+		public void add_cliente(Cliente cli){
+			Connection con = null;
+			CallableStatement calls=null;
+			try {
+				con= new Conexion().getConexion();
+				con.setAutoCommit(false);
+				String sp="{call add_cliente(?,?,?,?,?,?,?)}";
+				calls=con.prepareCall(sp);
+				calls.setString(1, cli.getCodigo());
+				calls.setInt(2, cli.getDNI());
+				calls.setString(3, cli.getNombre());
+				calls.setString(4, cli.getApellido());
+				calls.setInt(5, cli.getTelefono());
+				calls.setInt(6, cli.getMesa());
+				calls.setInt(7, cli.getEstado());
+				calls.execute();
+				con.commit();
+	            System.out.println("Insertado con exito");
+			} catch (SQLException e) {
+				// TODO: handle exception
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					System.out.println(e1.getMessage()+" Error de Insertar datos");
+				}
+			}finally {
+				try {
+					con.close();
+					calls.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+
+	}
+
+}
